@@ -1,17 +1,15 @@
-type StarterEntity @entity {
+type UsmanObject @entity {
 
   id: ID! #id is a required field
 
-  field1: Int!
+  blockNumber: Int!
 
-  field2: String #filed2 is an optional field
+  account: String #filed2 is an optional field
 
-  field3: BigInt
+  value: BigInt
 
-  field4: Date
+  timestamp: Date
 
-  field5: Boolean
-
-
+  success: Boolean
 
 }
