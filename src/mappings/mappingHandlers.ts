@@ -4,12 +4,22 @@ import {Balance} from "@polkadot/types/interfaces";
 
 export async function handleEvent(event: SubstrateEvent): Promise<void> {
     const {event: {data: [account, balance]}} = event;
-    //Create a new Account entity with ID using block hash
-    let record = new
-    Account(event.extrinsic.block.block.header.hash.toString());
-    // Assign the Polkadot address to the account field
-    record.account = account.toString();
-    // Assign the balance to the balance field "type cast as Balance"
-    record.balance = (balance as Balance).toBigInt();
-    await record.save();
+
+    const id = account.toString();
+    const value = (balance as Balance).toBigInt();
+
+    const existingRecord = await Account.get(id);
+
+    if (existingRecord) {
+        existingRecord.value = value;
+        existingRecord.total = existingRecord.total + value;
+        await existingRecord.save();
+    } else {
+        const record = new Account(id);
+        record.account = id;
+        record.value = value;
+        record.total = value;
+        logger.info('\nrecord ' + record);
+        await record.save();
+    }
 }
