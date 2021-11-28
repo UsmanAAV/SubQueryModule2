@@ -6,7 +6,7 @@ type UsmanObject @entity {
 
   account: String #filed2 is an optional field
 
-  value: BigInt
+  value: BigInt @index
 
   timestamp: Date
 
