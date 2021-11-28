@@ -1,15 +1,5 @@
-type UsmanObject @entity {
-
-  id: ID! #id is a required field
-
-  blockNumber: Int!
-
-  account: String #filed2 is an optional field
-
-  value: BigInt @index
-
-  timestamp: Date
-
-  success: Boolean
-
+type Account @entity {
+  id: ID!
+  account: String
+  balance: BigInt
 }

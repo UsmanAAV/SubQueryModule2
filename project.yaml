@@ -15,12 +15,8 @@ dataSources:
     mapping:
       file: ./dist/index.js
       handlers:
-        - handler: handleBlock
-          kind: substrate/BlockHandler
         - handler: handleEvent
           kind: substrate/EventHandler
           filter:
             module: balances
-            method: Transfer
-        - handler: handleCall
-          kind: substrate/CallHandler
+            method: Deposit
