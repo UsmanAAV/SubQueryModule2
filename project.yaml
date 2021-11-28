@@ -8,34 +8,29 @@ schema:
 network:
   genesisHash: '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3'
   endpoint: wss://polkadot.api.onfinality.io/public-ws
+definitions:
+  mapping: &commonMapping
+    file: ./dist/index.js
+    handlers:
+      - handler: handleBlock
+        kind: substrate/BlockHandler
+      - handler: handleEvent
+        kind: substrate/EventHandler
+        filter:
+          module: balances
+          method: Deposit
+      - handler: handleCall
+        kind: substrate/CallHandler
 dataSources:
   - name: PolkadotEndpoint
     kind: substrate/Runtime
-    startBlock: 1
-    mapping:
-      file: ./dist/index.js
-      handlers:
-        - handler: handleBlock
-          kind: substrate/BlockHandler
-        - handler: handleEvent
-          kind: substrate/EventHandler
-          filter:
-            module: balances
-            method: Deposit
-        - handler: handleCall
-          kind: substrate/CallHandler
+    startBlock: 6500
+    filter:
+      specname: polkadot
+    mapping: *commonMapping
   - name: KusamaEndpoint
     kind: substrate/Runtime
-    startBlock: 1
-    mapping:
-      file: ./dist/index.js
-      handlers:
-        - handler: handleBlock
-          kind: substrate/BlockHandler
-        - handler: handleEvent
-          kind: substrate/EventHandler
-          filter:
-            module: balances
-            method: Deposit
-        - handler: handleCall
-          kind: substrate/CallHandler
+    startBlock: 11500
+    filter:
+      specname: kusama
+    mapping: *commonMapping
