@@ -1,5 +1,5 @@
 {
-  "name": "SubQuery Module 2 lessons",
+  "name": "subquerymodule2lessons",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -9,8 +9,8 @@
     "test": "jest",
     "codegen": "./node_modules/.bin/subql codegen"
   },
-  "homepage": "https://github.com/subquery/subql-starter",
-  "repository": "github:subquery/subql-starter",
+  "homepage": "git@github.com:UsmanAAV/SubQueryModule2.git",
+  "repository": "git@github.com:UsmanAAV/SubQueryModule2.git",
   "files": [
     "dist",
     "schema.graphql",
