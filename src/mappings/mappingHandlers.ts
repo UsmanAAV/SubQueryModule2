@@ -8,6 +8,15 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
     let record = new UsmanObject(block.block.header.hash.toString());
     //Record block number
     record.blockNumber = block.block.header.number.toNumber();
+
+    logger.info('\nBlockNumber: ' + record.blockNumber);
+    logger.info('\nspecVersion: ' + block.specVersion);
+    logger.info('\ntimestamp: ' + block.timestamp);
+    logger.info('\nparentHash: ' + block.block.header.parentHash);
+    logger.info('\nstateRoot: ' + block.block.header.stateRoot);
+    logger.info('\nextrinsicsRoot: ' + block.block.header.extrinsicsRoot);
+    logger.info('\ndigest: ' + block.block.header.digest);
+
     await record.save();
 }
 
@@ -18,12 +27,6 @@ export async function handleEvent(event: SubstrateEvent): Promise<void> {
     record.account = from.toString();
     //Big integer type Balance of a transfer event
     record.value = (value as Balance).toBigInt();
-
-    logger.info('\nMODULE: ' + event.event.method);
-    logger.info('\nMETHOD: ' + event.event.section);
-    logger.info('\nVALUE: ' + record.value);
-    logger.info('\nFROM: ' + record.account);
-
     await record.save();
 }
 
