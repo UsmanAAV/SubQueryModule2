@@ -11,7 +11,7 @@ network:
 dataSources:
   - name: main
     kind: substrate/Runtime
-    startBlock: 1
+    startBlock: 7904617
     mapping:
       file: ./dist/index.js
       handlers:
@@ -21,6 +21,6 @@ dataSources:
           kind: substrate/EventHandler
           filter:
             module: balances
-            method: Deposit
+            method: Transfer
         - handler: handleCall
           kind: substrate/CallHandler

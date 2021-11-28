@@ -12,12 +12,18 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
 }
 
 export async function handleEvent(event: SubstrateEvent): Promise<void> {
-    const {event: {data: [account, balance]}} = event;
+    const {event: {data: [from, _to, value]}} = event;
     //Retrieve the record by its ID
     const record = await StarterEntity.get(event.extrinsic.block.block.header.hash.toString());
-    record.field2 = account.toString();
+    record.field2 = from.toString();
     //Big integer type Balance of a transfer event
-    record.field3 = (balance as Balance).toBigInt();
+    record.field3 = (value as Balance).toBigInt();
+
+    logger.info('\nMODULE: ' + event.event.method);
+    logger.info('\nMETHOD: ' + event.event.section);
+    logger.info('\nVALUE: ' + record.field3);
+    logger.info('\nFROM: ' + record.field2);
+
     await record.save();
 }
 
